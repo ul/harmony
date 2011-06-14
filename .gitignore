@@ -1,0 +1,10 @@
+pom.xml
+*jar
+/lib/
+/classes/
+/src/harmony/testrun.clj
+.lein-deps-sum
+.project
+.classpath
+.directory
+/.settings/
