@@ -51,7 +51,7 @@ Contains the definition of `Dimension` protocol and two sample dimensions.
 `modify [this x]` - returns a modified argument value which can exceed allowed range as it will be 
 corrected with `to-bounds`.
 
-There are two sample dimensions: `RealDimension` and `DiscreteDimension`.
+There is one sample dimension: `RealDimension`.
 
 ## Usage
 

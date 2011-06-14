@@ -10,18 +10,7 @@
    "Returns a sligthly modified argument value. New value doesn't
     have to be within dimension range, as long as it can be corrected 
     with to-bounds"))
-
-(defrecord DiscreteDimension [lower upper step delta] 
-  Dimension
-  (get-random [this] (+ (* step (rand-int (int (/ (- upper lower) step))))
-                        lower))
-  
-  (to-bounds  [this x] (if-not (and (>= upper x) (<= lower x)) 
-                         (max (min x upper) lower)
-                         x))
-  
-  (modify     [this x] (+ x (if (> (rand) 0.5) delta (- delta)))))
-                         
+                        
 (defrecord RealDimension [lower upper fw]
   Dimension
   (get-random [this] (+ (rand (- upper lower)) lower)) 
@@ -32,17 +21,9 @@
   
   (modify     [this x] (+ x (* fw (dec (rand 2))))))
   
-
 (defn get-real-dim
   "Returns an instance of a dimension of real numbers. 
   Takes 3 arguments: lower boundary, upper boundary and fret width -
   the amount of maximum change in pitch adjustment, usually between 0.01 * allowed range and 0.001 * allowed range"
   [l u fw]
   (RealDimension. l u fw))  
-  
-(defn get-discrete-dim 
-  "Returns an instance of a discrete dimension. 
-  Takes 4 arguments: lower boundary, upper boundary, step size and delta - 
-  the amount that is added or subtracted during the modification. Delta should be a multiple of step."
-  [l u step delta]
-  (DiscreteDimension. l u step delta))
