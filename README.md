@@ -9,7 +9,7 @@ Please read the description on [wikipedia](http://en.wikipedia.org/wiki/Harmony_
 
 `harmony-seq` creates an inifinite sequence of harmony memories
 
-  [& {:keys [hms hmcr par dims f] :or {hms 30 hmcr 0.9 par 0.3}}]
+    [& {:keys [hms hmcr par dims f] :or {hms 30 hmcr 0.9 par 0.3}}]
 
 Most arguments are optional. You only have to provide a sequence of dimensions
 implementing `Dimension` protocol and a function that takes a sequence of arguments
@@ -18,14 +18,14 @@ and returns a numeric value.
 Please note that the algorithm tries to maximize vector values, so if you want to
 minimize something you should use for example something like:
 
-  #(- 0 my-foo-to-be-minimized)
+    #(- 0 my-foo-to-be-minimized)
 
 `harmony-search` is a helper function and returns a harmony memory after a specified 
 number of iterations
 
 It takes and additional argument `:n` which specifies the desired number of iterations
 
-  [& {:keys [hms hmcr par dims f n] :or {hms 30 hmcr 0.9 par 0.3}}]
+    [& {:keys [hms hmcr par dims f n] :or {hms 30 hmcr 0.9 par 0.3}}]
 
 #### arguments
 
@@ -55,18 +55,18 @@ There are two sample dimensions: `RealDimension` and `DiscreteDimension`.
 
 ## Usage
 
-  (require '[harmony.core :as hc]
-	   '[harmony.dimension :as hd])
+    (require '[harmony.core :as hc]
+	    '[harmony.dimension :as hd])
 
-  ;;create some dimensions 
-  (def dims [(hd/get-real-dim 0 5 0.05) (hd/get-real-dim 5 10 0.05)])
+    ;;create some dimensions 
+    (def dims [(hd/get-real-dim 0 5 0.05) (hd/get-real-dim 5 10 0.05)])
 
-  ;;returns the best harmony memory vector after 100 iterations
-  (last (hs/harmony-search :dims dims :f #(apply + %) :n 100))
+    ;;returns the best harmony memory vector after 100 iterations
+    (last (hs/harmony-search :dims dims :f #(apply + %) :n 100))
 
-  ;;returns the best vector from the first harmomy memory that meets the specified condition
-  (last (first (drop-while #(< (first (last %)) 32)
-			   (hs/harmony-seq :dims dims :f #(reduce * %)))))
+    ;;returns the best vector from the first harmomy memory that meets the specified condition
+    (last (first (drop-while #(< (first (last %)) 32)
+			     (hs/harmony-seq :dims dims :f #(reduce * %)))))
 
 ## License
 
