@@ -21,7 +21,7 @@
 (defn- update-row
   "Creates a new candidate vector"
   [hms hm hmcr par dims f]
-  (let [r (map-indexed #(new-elt %1 hms hm hmcr par %2) dims)]
+  (let [r (map-indexed #(new-elt (inc %1) hms hm hmcr par %2) dims)]
     (vec (concat [(f r)] r))))
 
 (defn- update-memory
